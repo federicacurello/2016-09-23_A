@@ -8,7 +8,7 @@ import it.polito.tdp.gestionale.model.Corso;
 import it.polito.tdp.gestionale.model.Studente;
 
 public class TestDAO {
-
+/*
 	public static void main(String[] args) {
 
 		DidatticaDAO dDAO = new DidatticaDAO();
@@ -28,6 +28,7 @@ public class TestDAO {
 		Corso corso = new Corso("01KSUPG");
 		dDAO.getStudentiIscrittiAlCorso(corso, mapStudenti);
 		System.out.println(corso.getStudenti());
+		
 	}
-
+*/
 }

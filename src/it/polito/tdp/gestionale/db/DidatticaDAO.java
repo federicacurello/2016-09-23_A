@@ -34,12 +34,14 @@ public class DidatticaDAO {
 				Studente studente = mapStudenti.get(matricola);
 				if (studente != null) {
 					studentiIscrittiAlCorso.add(studente);
+					studente.setCorsi(corso);
 				} else {
-					System.out.println("ERRORE! Lo studente non è presente!");
+					System.out.println("ERRORE! Lo studente non presente!");
 				}
 			}
 
 			corso.setStudenti(studentiIscrittiAlCorso);
+			
 
 		} catch (SQLException e) {
 			// e.printStackTrace();
@@ -67,7 +69,7 @@ public class DidatticaDAO {
 				Corso s = new Corso(rs.getString("codins"), rs.getInt("crediti"), rs.getString("nome"), rs.getInt("pd"));
 				corsi.add(s);
 			}
-
+			
 			return corsi;
 
 		} catch (SQLException e) {
@@ -79,11 +81,12 @@ public class DidatticaDAO {
 	/*
 	 * Ottengo tutti gli studenti salvati nel Db
 	 */
-	public List<Studente> getTuttiStudenti() {
+	public List<Studente> getTuttiStudenti(Map<Integer, Studente> mapStudenti) {
 
 		final String sql = "SELECT * FROM studente";
 
 		List<Studente> studenti = new LinkedList<Studente>();
+		
 
 		try {
 			Connection conn = ConnectDB.getConnection();
@@ -95,12 +98,13 @@ public class DidatticaDAO {
 
 				Studente s = new Studente(rs.getInt("matricola"), rs.getString("cognome"), rs.getString("nome"), rs.getString("CDS"));
 				studenti.add(s);
+				mapStudenti.put(s.getMatricola(), s);
 			}
-
+			
 			return studenti;
 
 		} catch (SQLException e) {
-			// e.printStackTrace();
+			 e.printStackTrace();
 			throw new RuntimeException("Errore Db");
 		}
 	}

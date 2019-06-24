@@ -1,9 +1,10 @@
 package it.polito.tdp.gestionale.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class Studente {
+public class Studente extends Nodo {
 
 	private List<Corso> corsi;
 	private int matricola;
@@ -20,6 +21,7 @@ public class Studente {
 		this.cognome = cognome;
 		this.nome = nome;
 		this.cds = cds;
+		corsi= new LinkedList<Corso>();
 	}
 
 	/*
@@ -70,7 +72,7 @@ public class Studente {
 		return corsi;
 	}
 
-	public void setCorsi(List<Corso> corsi) {
-		this.corsi = corsi;
+	public void setCorsi(Corso corso) {
+		corsi.add(corso);
 	}
 }
