@@ -61,41 +61,7 @@ public class Model {
 		return s;
 	}
 	
-	public List<Corso> findMinimalSet(){
-		List<Corso> soluzioneParziale = new ArrayList<Corso>();
-		List<Corso> soluzioneMigliore = new ArrayList<Corso>();
-		
-		recursive(soluzioneParziale, soluzioneMigliore);
-		
-		return soluzioneMigliore;
-	}
 	
-	private void recursive(List<Corso> soluzioneParziale, List<Corso> soluzioneMigliore) {
-		
-//		System.out.println(soluzioneParziale);
-		
-		HashSet<Studente> hashSetStudenti = new HashSet<Studente>(studenti);
-		for (Corso corso : soluzioneParziale) {
-			hashSetStudenti.removeAll(corso.getStudenti());
-		}
-		if (hashSetStudenti.isEmpty()) {
-			if (soluzioneMigliore.isEmpty())
-				soluzioneMigliore.addAll(soluzioneParziale);
-			if (soluzioneParziale.size() < soluzioneMigliore.size()){
-				soluzioneMigliore.clear();
-				soluzioneMigliore.addAll(soluzioneParziale);
-			}
-		}
-		
-		for (Corso corso : corsi) {
-			if (soluzioneParziale.isEmpty() || corso.compareTo(soluzioneParziale.get(soluzioneParziale.size()-1)) > 0) {
-				soluzioneParziale.add(corso);
-				recursive(soluzioneParziale, soluzioneMigliore);
-				soluzioneParziale.remove(corso);
-			}
-		}
-		
-	}
 	public List<Corso> getPercorsoMinimo(){
 		this.ottima = new ArrayList<Corso>(corsi);
 		List<Corso> parziale = new ArrayList<Corso>();
